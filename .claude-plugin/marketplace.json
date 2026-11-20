@@ -9,7 +9,7 @@
     {
       "name": "uptizm",
       "source": "./",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Manage Uptizm monitors, custom metrics, incidents, status pages and boards from Claude Code. Adds the uptizm skill and the remote MCP server at mcp.uptizm.com.",
       "homepage": "https://uptizm.com/docs/mcp",
       "repository": "https://github.com/uptizm/skills",
@@ -18,7 +18,7 @@
       "mcpServers": {
         "uptizm": {
           "type": "http",
-          "url": "https://mcp.uptizm.com/mcp"
+          "url": "https://mcp.uptizm.com"
         }
       }
     }

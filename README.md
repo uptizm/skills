@@ -23,8 +23,8 @@ npx skills add uptizm/skills
 
 This installs only the skill. Connect it to your account in one of two ways:
 
-- **MCP**, for Claude Code: `claude mcp add --transport http uptizm https://mcp.uptizm.com/mcp`, then `/mcp` to sign in.
-- **API key**, for any agent: create a key in the app under **Settings, Team, API keys** and export it before you start the agent.
+- **MCP**, for any MCP client (Claude Code, ChatGPT, Cursor, Codex, VS Code and more): add the server `https://mcp.uptizm.com` and sign in with your Uptizm account, or send a team API key as its `Authorization` header. In Claude Code: `claude mcp add --transport http uptizm https://mcp.uptizm.com`, then `/mcp`. [Setup for each client](https://uptizm.com/docs/mcp.md).
+- **API key**, for any agent: create a key in the app under **Settings, Team, API keys** and export it before you start the agent; the skill then uses the REST API.
 
   ```
   export UPTIZM_API_KEY=upz_...
@@ -40,10 +40,10 @@ This installs only the skill. Connect it to your account in one of two ways:
 
 ## How access works
 
-An MCP connection is a team API key named "Claude Code (MCP)", created when you approve it. You can see and revoke it in **Settings, Team, API keys** like any other key. A key acts on one team only, and each call needs the ability its access level grants; a call it does not cover is refused with the missing ability named. The agent asks you before a call that deletes something or notifies people, such as resolving an incident or announcing maintenance.
+Signing in creates a team API key named after the client, such as "Claude Code (MCP)", when you approve it. You can see and revoke it in **Settings, Team, API keys** like any other key. A key acts on one team only, and each call needs the ability its access level grants; a call it does not cover is refused with the missing ability named. The agent asks you before a call that deletes something or notifies people, such as resolving an incident or announcing maintenance.
 
 ## Documentation
 
-- [Connect Claude Code (MCP)](https://uptizm.com/docs/mcp.md)
+- [Connect an AI agent (MCP)](https://uptizm.com/docs/mcp.md)
 - [API quickstart](https://uptizm.com/docs/quickstart.md)
 - [Every endpoint](https://uptizm.com/llms.txt)

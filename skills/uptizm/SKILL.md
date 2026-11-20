@@ -13,10 +13,10 @@ There are two ways in, and they run the same API with the same permissions: the 
 
 Check in this order, use the first that works, and stay on it for the session.
 
-1. **MCP server.** Tools named `AccountGet`, `MonitorList`, `IncidentList` and so on are available. Claude Code shows them as `mcp__uptizm__MonitorList`, or `mcp__plugin_uptizm_uptizm__MonitorList` when they come from the plugin; when tools are deferred, search for `uptizm`. If the server is listed but answers that it needs authentication, ask the user to run `/mcp` and sign in to `uptizm`.
+1. **MCP server.** Tools named `AccountGet`, `MonitorList`, `IncidentList` and so on are available, under whatever prefix the client adds (Claude Code shows `mcp__uptizm__MonitorList`, or `mcp__plugin_uptizm_uptizm__MonitorList` from the plugin); when tools are deferred, search for `uptizm`. If the server is listed but answers that it needs authentication, ask the user to sign in to it from their client (in Claude Code, `/mcp`).
 2. **REST API.** `UPTIZM_API_KEY` is set in the environment (`test -n "$UPTIZM_API_KEY"`). Base URL `https://api.uptizm.com/v1`.
 3. **Neither.** You cannot sign in for the user, so stop and offer the ways to connect:
-   - MCP, for Claude Code: `claude mcp add --transport http uptizm https://mcp.uptizm.com/mcp`, then `/mcp` and sign in to Uptizm in the browser. The consent screen picks the team and the access (read only, read and write, full).
+   - MCP: add the server `https://mcp.uptizm.com` to the client (Claude Code: `claude mcp add --transport http uptizm https://mcp.uptizm.com`, then `/mcp`) and sign in to Uptizm in the browser; the consent screen picks the team and the access (read only, read and write, full). A client without MCP sign-in sends a team key instead, as the header `Authorization: Bearer upz_...` on the server entry. Per-client setup: https://uptizm.com/docs/mcp.md.
    - API key: the user creates one in the app under **Settings, Team, API keys** and exports it as `UPTIZM_API_KEY` in the shell that starts the agent.
    - No account yet: the human gets a temporary workspace key from the Uptizm website; an agent cannot create one. Its limits are in https://uptizm.com/docs/anonymous-workspaces.md.
 
@@ -38,7 +38,7 @@ Start with `AccountGet` (MCP) or `GET /me` (REST). It returns the team, the plan
 
 MCP tool errors start with the HTTP status (`403: ...`); REST returns the status and a JSON body.
 
-- 401: the key was revoked or expired, or the MCP connection lapsed after a long idle time. Ask the user to sign in again with `/mcp`, or for a new key.
+- 401: the key was revoked or expired, or the MCP connection lapsed after a long idle time. Ask the user to sign in again from their client, or for a new key.
 - 403 naming a required ability (`required_ability` in REST, "Required ability: ..." over MCP): the access is too low. Tell the user which ability is missing and how to get it (reconnect with wider access, or a key with that preset). Do not retry.
 - 422: fix the fields named in `errors` and send again.
 - 429: wait the `Retry-After` seconds. A key gets 120 reads and 30 writes a minute.
