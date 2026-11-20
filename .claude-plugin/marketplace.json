@@ -1,0 +1,26 @@
+{
+  "name": "uptizm",
+  "description": "Uptizm for AI agents: the uptizm skill and the Uptizm MCP server.",
+  "owner": {
+    "name": "Uptizm",
+    "url": "https://uptizm.com"
+  },
+  "plugins": [
+    {
+      "name": "uptizm",
+      "source": "./",
+      "version": "0.1.0",
+      "description": "Manage Uptizm monitors, custom metrics, incidents, status pages and boards from Claude Code. Adds the uptizm skill and the remote MCP server at mcp.uptizm.com.",
+      "homepage": "https://uptizm.com/docs/mcp",
+      "repository": "https://github.com/uptizm/skills",
+      "license": "MIT",
+      "keywords": ["uptime", "monitoring", "incidents", "status-page", "mcp"],
+      "mcpServers": {
+        "uptizm": {
+          "type": "http",
+          "url": "https://mcp.uptizm.com/mcp"
+        }
+      }
+    }
+  ]
+}
